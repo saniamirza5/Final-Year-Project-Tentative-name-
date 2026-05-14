@@ -41,7 +41,7 @@ function AssistantPage() {
 
       <div className="grid gap-6 xl:grid-cols-[380px_1fr]">
         <div className="space-y-4">
-          <div className="rounded-xl border border-border bg-surface shadow-card p-5">
+          <div className="rounded-md border border-border bg-surface p-5">
             <p className="text-xs font-semibold uppercase tracking-wider text-primary">Capabilities</p>
             <div className="mt-3 space-y-3">
               {capabilities.map((c) => (
@@ -58,7 +58,7 @@ function AssistantPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-border bg-surface shadow-card p-5">
+          <div className="rounded-md border border-border bg-surface p-5">
             <p className="text-xs font-semibold uppercase tracking-wider text-primary">Suggested prompts</p>
             <div className="mt-3 space-y-2">
               {prompts.map((p) => (

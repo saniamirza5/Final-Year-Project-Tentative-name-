@@ -8,12 +8,12 @@ const tooltipStyle = {
   border: "1px solid var(--color-border)",
   borderRadius: 8,
   fontSize: 12,
-  boxShadow: "var(--shadow-elevated)",
+  boxShadow: "none",
 };
 
 export function ShipmentChart({ height = 280 }: { height?: number }) {
   return (
-    <div className="rounded-xl border border-border bg-surface shadow-card">
+    <div className="rounded-md border border-border bg-surface">
       <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
         <div>
           <h3 className="text-sm font-semibold text-foreground">Shipment Volume — last 7 days</h3>

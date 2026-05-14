@@ -1,61 +1,102 @@
-import { Sparkles, AlertTriangle, Boxes, Truck } from "lucide-react";
+import { useState } from "react";
+import { ChevronDown, Lightbulb } from "lucide-react";
 import type { AIInsight } from "@/types/dashboard";
 import { aiInsights as defaults } from "@/mock/dashboard-data";
 import { cn } from "@/lib/utils";
-
-const iconFor = {
-  Demand: Sparkles,
-  Risk: AlertTriangle,
-  Inventory: Boxes,
-  Logistics: Truck,
-} as const;
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const impactTone = {
-  High: "bg-destructive/10 text-destructive border-destructive/20",
-  Medium: "bg-warning/15 text-warning-foreground border-warning/30",
-  Low: "bg-info/10 text-info border-info/20",
+  High: "bg-red-950/45 text-red-200",
+  Medium: "bg-amber-950/40 text-amber-200",
+  Low: "bg-muted/80 text-muted-foreground",
 } as const;
 
-export function AIInsights({ insights = defaults }: { insights?: AIInsight[] }) {
+function InsightRow({
+  insight,
+  compact,
+}: {
+  insight: AIInsight;
+  compact: boolean;
+}) {
   return (
-    <div className="rounded-xl border border-border bg-surface shadow-card">
-      <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
+    <div
+      className={cn(
+        "border-b border-border/50 last:border-0",
+        compact ? "px-5 py-4" : "px-6 py-5"
+      )}
+    >
+      <div className="flex flex-wrap items-center gap-2">
+        <h4 className="min-w-0 flex-1 text-sm font-medium leading-snug text-foreground">{insight.title}</h4>
+        <span
+          className={cn(
+            "shrink-0 rounded-md px-2 py-0.5 text-xs font-medium",
+            impactTone[insight.impact]
+          )}
+        >
+          {insight.impact}
+        </span>
+      </div>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{insight.summary}</p>
+      {!compact && (
+        <p className="mt-2 text-xs text-muted-foreground">Confidence {insight.confidence}%</p>
+      )}
+    </div>
+  );
+}
+
+export function AIInsights({
+  insights = defaults,
+  variant = "default",
+  maxPreview = 3,
+}: {
+  insights?: AIInsight[];
+  variant?: "default" | "compact";
+  maxPreview?: number;
+}) {
+  const [open, setOpen] = useState(false);
+  const compact = variant === "compact";
+  const preview = insights.slice(0, maxPreview);
+  const extra = insights.slice(maxPreview);
+  const hasExtra = compact && extra.length > 0;
+
+  return (
+    <div className="rounded-md border border-border/70 bg-surface">
+      <div className="flex items-center justify-between border-b border-border/60 px-5 py-4">
         <div className="flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-primary" />
-          <h3 className="text-sm font-semibold text-foreground">AI Insights</h3>
+          <Lightbulb className="h-4 w-4 text-primary" />
+          <h3 className="text-lg font-medium text-foreground">AI insights</h3>
         </div>
-        <span className="text-[11px] text-muted-foreground">Updated just now</span>
+        <span className="text-xs text-muted-foreground">Updated recently</span>
       </div>
-      <div className="divide-y divide-border">
-        {insights.map((i) => {
-          const Icon = iconFor[i.category];
-          return (
-            <div key={i.id} className="group p-4 transition hover:bg-muted/40">
-              <div className="flex items-start gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-soft text-primary">
-                  <Icon className="h-4 w-4" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h4 className="text-sm font-semibold text-foreground">{i.title}</h4>
-                    <span className={cn("rounded-full border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide", impactTone[i.impact])}>
-                      {i.impact}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{i.summary}</p>
-                  <div className="mt-2.5 flex items-center gap-2">
-                    <div className="h-1.5 flex-1 max-w-[120px] overflow-hidden rounded-full bg-muted">
-                      <div className="h-full rounded-full bg-gradient-primary" style={{ width: `${i.confidence}%` }} />
-                    </div>
-                    <span className="text-[11px] font-semibold text-foreground">{i.confidence}%</span>
-                    <span className="text-[10px] text-muted-foreground">confidence</span>
-                  </div>
-                </div>
-              </div>
+
+      {compact && hasExtra ? (
+        <Collapsible open={open} onOpenChange={setOpen}>
+          <div>
+            {preview.map((i) => (
+              <InsightRow key={i.id} insight={i} compact />
+            ))}
+          </div>
+          <CollapsibleContent>
+            <div className="border-t border-border/60">
+              {extra.map((i) => (
+                <InsightRow key={i.id} insight={i} compact />
+              ))}
             </div>
-          );
-        })}
-      </div>
+          </CollapsibleContent>
+          <div className="border-t border-border/60 px-2 py-2">
+            <CollapsibleTrigger className="flex w-full items-center justify-center gap-1 rounded-sm py-2 text-sm font-medium text-primary transition-colors hover:bg-muted/60">
+              <span>{open ? "Show fewer" : "View all insights"}</span>
+              <ChevronDown className={cn("h-4 w-4 transition-transform", open && "rotate-180")} />
+            </CollapsibleTrigger>
+          </div>
+        </Collapsible>
+      ) : (
+        <div>
+          {(compact ? preview : insights).map((i) => (
+            <InsightRow key={i.id} insight={i} compact={compact} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

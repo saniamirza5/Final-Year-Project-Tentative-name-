@@ -33,7 +33,7 @@ function ShipmentsPage() {
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-border bg-surface p-4 shadow-card">
+          <div key={s.label} className="rounded-md border border-border bg-surface p-4">
             <div className={`inline-flex h-9 w-9 items-center justify-center rounded-lg ${s.tone}`}>
               <s.Icon className="h-4.5 w-4.5" />
             </div>

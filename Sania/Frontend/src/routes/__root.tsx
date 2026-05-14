@@ -90,13 +90,12 @@ function RootComponent() {
 
 function AppShell() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  // AI assistant page renders its own full-bleed layout, but we still want sidebar.
   return (
-    <div className="flex min-h-screen w-full bg-background">
+    <div className="flex h-dvh min-h-0 w-full overflow-hidden bg-background">
       <Sidebar />
-      <div className="flex min-h-screen flex-1 flex-col">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-background">
         <Navbar />
-        <main className="flex-1 px-5 py-6 lg:px-8">
+        <main className="min-h-0 flex-1 overflow-y-auto px-5 py-8 lg:px-10">
           <Outlet />
         </main>
       </div>
