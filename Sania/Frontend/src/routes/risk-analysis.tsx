@@ -21,7 +21,7 @@ function RiskPage() {
   const high = riskMatrix.filter((r) => r.exposure > 60).length;
   const tooltipStyle = {
     background: "var(--color-surface)", border: "1px solid var(--color-border)",
-    borderRadius: 8, fontSize: 12, boxShadow: "var(--shadow-elevated)",
+    borderRadius: 4, fontSize: 12, boxShadow: "none",
   };
 
   return (
@@ -33,7 +33,7 @@ function RiskPage() {
       />
 
       <div className="grid gap-3 md:grid-cols-3">
-        <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-4">
+        <div className="rounded-md border border-destructive/30 bg-destructive/5 p-4">
           <div className="flex items-center gap-2">
             <AlertTriangle className="h-4 w-4 text-destructive" />
             <p className="text-xs font-semibold uppercase tracking-wider text-destructive">High exposure</p>
@@ -41,7 +41,7 @@ function RiskPage() {
           <p className="mt-2 text-2xl font-semibold text-foreground">{high}</p>
           <p className="text-[11px] text-muted-foreground">categories above threshold</p>
         </div>
-        <div className="rounded-xl border border-border bg-surface p-4">
+        <div className="rounded-md border border-border bg-surface p-4">
           <div className="flex items-center gap-2">
             <ShieldAlert className="h-4 w-4 text-primary" />
             <p className="text-xs font-semibold uppercase tracking-wider text-primary">Network risk score</p>
@@ -49,7 +49,7 @@ function RiskPage() {
           <p className="mt-2 text-2xl font-semibold text-foreground">58<span className="text-sm text-muted-foreground"> / 100</span></p>
           <p className="text-[11px] text-muted-foreground">+4 vs last week</p>
         </div>
-        <div className="rounded-xl border border-border bg-surface p-4">
+        <div className="rounded-md border border-border bg-surface p-4">
           <div className="flex items-center gap-2">
             <TrendingUp className="h-4 w-4 text-warning-foreground" />
             <p className="text-xs font-semibold uppercase tracking-wider text-warning-foreground">Anomalies (24h)</p>
@@ -61,7 +61,7 @@ function RiskPage() {
 
       <div className="grid gap-6 xl:grid-cols-3">
         <div className="xl:col-span-2"><RiskChart /></div>
-        <div className="rounded-xl border border-border bg-surface shadow-card">
+        <div className="rounded-md border border-border bg-surface">
           <div className="border-b border-border px-5 py-3.5">
             <h3 className="text-sm font-semibold text-foreground">Network risk trend</h3>
             <p className="text-[11px] text-muted-foreground">8-week aggregate score</p>

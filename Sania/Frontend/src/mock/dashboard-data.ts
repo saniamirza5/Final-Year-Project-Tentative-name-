@@ -15,6 +15,11 @@ export const kpiMetrics: KpiMetric[] = [
   { id: "k6", label: "AI Decisions / hr", value: "342", delta: 11.5, trend: "up", hint: "autonomous" },
 ];
 
+/** Primary operations overview KPIs (max four). */
+export const overviewKpiMetrics: KpiMetric[] = kpiMetrics.filter((m) =>
+  ["k1", "k2", "k4", "k6"].includes(m.id)
+);
+
 export const activityFeed: ActivityEvent[] = [
   { id: "a1", timestamp: "2m ago", agent: "ForecastAgent", action: "Re-trained demand model for Region EU-West (+2.1% accuracy)", status: "success" },
   { id: "a2", timestamp: "6m ago", agent: "RiskAgent", action: "Flagged supplier ACME-2241 — lead time variance > 3σ", status: "warning" },
@@ -28,6 +33,26 @@ export const aiInsights: AIInsight[] = [
   { id: "i1", title: "Demand surge expected — North America", summary: "Model projects +18% lift in SKU-330 family over the next 14 days. Pre-position 2 truckloads to Dallas.", impact: "High", confidence: 92, category: "Demand" },
   { id: "i2", title: "Supplier risk rising — ACME-2241", summary: "Lead time drift + financial signal degradation. Recommend dual-sourcing 30% volume to Vendor B.", impact: "High", confidence: 87, category: "Risk" },
   { id: "i3", title: "Overstock detected — EU warehouses", summary: "12 SKUs sit 38 days above target. Promotional reallocation could free $214K working capital.", impact: "Medium", confidence: 81, category: "Inventory" },
+];
+
+export const aiInsightsExtended: AIInsight[] = [
+  ...aiInsights,
+  {
+    id: "i4",
+    title: "Port congestion — Los Angeles",
+    summary: "Dwell time up 6% vs baseline. Consider shifting 8% westbound ocean volume to alternate routing via Seattle.",
+    impact: "Medium",
+    confidence: 79,
+    category: "Logistics",
+  },
+  {
+    id: "i5",
+    title: "Safety stock optimization",
+    summary: "Boston DC safety stock for 4 SKUs can be reduced 9% without breaching 98% fill-rate target.",
+    impact: "Low",
+    confidence: 74,
+    category: "Inventory",
+  },
 ];
 
 export const autonomousDecisions: AutonomousDecision[] = [

@@ -8,7 +8,7 @@ export function ChatButton() {
   return (
     <button
       onClick={toggle}
-      className="fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-gradient-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-elevated transition hover:scale-[1.03] hover:shadow-glow"
+      className="fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-sm bg-primary px-4 py-3 text-sm font-medium text-primary-foreground transition hover:opacity-90"
     >
       <span className="relative flex h-2 w-2">
         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-foreground opacity-60" />

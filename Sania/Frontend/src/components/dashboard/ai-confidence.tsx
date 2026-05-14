@@ -13,7 +13,7 @@ const items: ConfidenceItem[] = [
 
 export function AIConfidence() {
   return (
-    <div className="rounded-xl border border-border bg-surface shadow-card p-5">
+    <div className="rounded-md border border-border bg-surface p-5">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-semibold text-foreground">Model Confidence</h3>
         <span className="text-[11px] text-muted-foreground">live · 4 models</span>

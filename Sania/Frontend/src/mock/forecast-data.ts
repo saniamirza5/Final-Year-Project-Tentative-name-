@@ -1,16 +1,16 @@
 import type { ForecastPoint } from "@/types/prediction";
 
 export const forecastSeries: ForecastPoint[] = [
-  { period: "Wk 1", actual: 4200, forecast: 4150, upper: 4400, lower: 3900 },
-  { period: "Wk 2", actual: 4480, forecast: 4400, upper: 4680, lower: 4120 },
-  { period: "Wk 3", actual: 4620, forecast: 4580, upper: 4880, lower: 4280 },
-  { period: "Wk 4", actual: 4910, forecast: 4880, upper: 5200, lower: 4560 },
-  { period: "Wk 5", actual: 5180, forecast: 5210, upper: 5520, lower: 4900 },
-  { period: "Wk 6", actual: 5320, forecast: 5390, upper: 5700, lower: 5080 },
-  { period: "Wk 7", actual: null, forecast: 5610, upper: 5980, lower: 5240 },
-  { period: "Wk 8", actual: null, forecast: 5820, upper: 6240, lower: 5400 },
-  { period: "Wk 9", actual: null, forecast: 6020, upper: 6500, lower: 5540 },
-  { period: "Wk 10", actual: null, forecast: 6240, upper: 6780, lower: 5700 },
+  { period: "Week 1", actual: 4200, forecast: 4150, upper: 4400, lower: 3900 },
+  { period: "Week 2", actual: 4480, forecast: 4400, upper: 4680, lower: 4120 },
+  { period: "Week 3", actual: 4620, forecast: 4580, upper: 4880, lower: 4280 },
+  { period: "Week 4", actual: 4910, forecast: 4880, upper: 5200, lower: 4560 },
+  { period: "Week 5", actual: 5180, forecast: 5210, upper: 5520, lower: 4900 },
+  { period: "Week 6", actual: 5320, forecast: 5390, upper: 5700, lower: 5080 },
+  { period: "Week 7", actual: null, forecast: 5610, upper: 5980, lower: 5240 },
+  { period: "Week 8", actual: null, forecast: 5820, upper: 6240, lower: 5400 },
+  { period: "Week 9", actual: null, forecast: 6020, upper: 6500, lower: 5540 },
+  { period: "Week 10", actual: null, forecast: 6240, upper: 6780, lower: 5700 },
 ];
 
 export const inventoryHistory = [

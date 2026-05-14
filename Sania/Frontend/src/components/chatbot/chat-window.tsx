@@ -29,8 +29,8 @@ export function ChatWindow({ embedded = false }: Props) {
   }
 
   const wrapperClass = embedded
-    ? "flex h-full flex-col rounded-xl border border-border bg-surface shadow-card overflow-hidden"
-    : "fixed bottom-6 right-6 z-40 flex h-[560px] w-[380px] flex-col rounded-2xl border border-border bg-surface shadow-elevated overflow-hidden";
+    ? "flex h-full flex-col rounded-md border border-border bg-surface overflow-hidden"
+    : "fixed bottom-6 right-6 z-40 flex h-[560px] w-[380px] flex-col rounded-md border border-border bg-surface overflow-hidden";
 
   return (
     <div className={wrapperClass}>

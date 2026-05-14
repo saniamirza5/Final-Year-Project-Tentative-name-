@@ -8,7 +8,7 @@ const tooltipStyle = {
   border: "1px solid var(--color-border)",
   borderRadius: 8,
   fontSize: 12,
-  boxShadow: "var(--shadow-elevated)",
+  boxShadow: "none",
 };
 
 function colorFor(v: number) {
@@ -19,7 +19,7 @@ function colorFor(v: number) {
 
 export function RiskChart({ height = 320 }: { height?: number }) {
   return (
-    <div className="rounded-xl border border-border bg-surface shadow-card">
+    <div className="rounded-md border border-border bg-surface">
       <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
         <div>
           <h3 className="text-sm font-semibold text-foreground">Risk Exposure by Category</h3>

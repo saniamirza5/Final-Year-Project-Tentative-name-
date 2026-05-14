@@ -6,7 +6,7 @@ interface Props {
 
 export function AIResponseCard({ insight }: Props) {
   return (
-    <div className="rounded-xl border border-border bg-surface p-3.5 shadow-card">
+    <div className="rounded-md border border-border bg-surface p-3.5">
       <div className="flex items-center gap-1.5 text-xs font-semibold text-primary">
         <Sparkles className="h-3.5 w-3.5" />
         {insight.title}

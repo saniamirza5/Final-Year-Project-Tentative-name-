@@ -15,7 +15,7 @@ export function ChatMessage({ msg }: { msg: Msg }) {
       </div>
       <div className={cn("max-w-[85%] space-y-2", isUser && "items-end")}>
         <div className={cn(
-          "rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed",
+          "rounded-md px-3.5 py-2.5 text-sm leading-relaxed",
           isUser
             ? "bg-primary text-primary-foreground rounded-tr-sm"
             : "bg-surface-muted text-foreground rounded-tl-sm"

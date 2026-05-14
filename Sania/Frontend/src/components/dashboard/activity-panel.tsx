@@ -1,42 +1,50 @@
-import { CheckCircle2, AlertTriangle, Info, XCircle, Activity } from "lucide-react";
 import type { ActivityEvent } from "@/types/dashboard";
 import { activityFeed as defaults } from "@/mock/dashboard-data";
 import { cn } from "@/lib/utils";
 
 const styles = {
-  success: { Icon: CheckCircle2, dot: "bg-success", text: "text-success" },
-  warning: { Icon: AlertTriangle, dot: "bg-warning", text: "text-warning-foreground" },
-  info: { Icon: Info, dot: "bg-info", text: "text-info" },
-  error: { Icon: XCircle, dot: "bg-destructive", text: "text-destructive" },
+  success: { dot: "bg-emerald-500" },
+  warning: { dot: "bg-amber-500" },
+  info: { dot: "bg-slate-400" },
+  error: { dot: "bg-destructive" },
 } as const;
 
-export function ActivityPanel({ events = defaults }: { events?: ActivityEvent[] }) {
+export function ActivityPanel({
+  events = defaults,
+  variant = "default",
+  previewCount,
+}: {
+  events?: ActivityEvent[];
+  variant?: "default" | "compact";
+  /** When set, only the first N events are shown. */
+  previewCount?: number;
+}) {
+  const list = previewCount != null ? events.slice(0, previewCount) : events;
+
   return (
-    <div className="rounded-xl border border-border bg-surface shadow-card">
-      <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
-        <div className="flex items-center gap-2">
-          <Activity className="h-4 w-4 text-primary" />
-          <h3 className="text-sm font-semibold text-foreground">Live Agent Activity</h3>
-        </div>
-        <span className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
-          <span className="live-dot" /> streaming
-        </span>
+    <div className="rounded-md border border-border/70 bg-surface">
+      <div className="flex items-center justify-between border-b border-border/60 px-5 py-4">
+        <h3 className="text-lg font-medium text-foreground">Agent activity</h3>
+        <span className="text-xs text-muted-foreground">{variant === "compact" ? "Recent" : "Event log"}</span>
       </div>
       <ol className="relative px-5 py-4">
-        <span className="absolute left-[26px] top-4 bottom-4 w-px bg-border" />
-        {events.map((e) => {
+        <span className="absolute bottom-6 left-[21px] top-6 w-px bg-border/60" />
+        {list.map((e) => {
           const s = styles[e.status];
           return (
-            <li key={e.id} className="relative pl-8 pb-4 last:pb-0">
-              <span className={cn("absolute left-[18px] top-1.5 h-2 w-2 rounded-full ring-4 ring-surface", s.dot)} />
+            <li key={e.id} className="relative pb-5 pl-8 last:pb-0">
+              <span
+                className={cn(
+                  "absolute left-[15px] top-1.5 h-2 w-2 rounded-full ring-4 ring-surface",
+                  s.dot
+                )}
+              />
               <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-xs font-semibold text-foreground">
-                    {e.agent} <span className={cn("ml-1 font-medium", s.text)}>•</span>
-                  </p>
-                  <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{e.action}</p>
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-foreground">{e.agent}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{e.action}</p>
                 </div>
-                <span className="shrink-0 text-[10px] text-muted-foreground">{e.timestamp}</span>
+                <span className="shrink-0 text-xs text-muted-foreground">{e.timestamp}</span>
               </div>
             </li>
           );

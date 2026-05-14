@@ -36,7 +36,7 @@ function InventoryPage() {
       />
 
       {critical > 0 && (
-        <div className="flex items-center gap-3 rounded-xl border border-destructive/30 bg-destructive/5 p-4">
+        <div className="flex items-center gap-3 rounded-md border border-destructive/30 bg-destructive/5 p-4">
           <AlertTriangle className="h-5 w-5 text-destructive" />
           <div>
             <p className="text-sm font-semibold text-destructive">{critical} SKU(s) in critical state</p>
@@ -50,7 +50,7 @@ function InventoryPage() {
         <WarehouseUtilization />
       </div>
 
-      <div className="rounded-xl border border-border bg-surface shadow-card overflow-hidden">
+      <div className="rounded-md border border-border bg-surface overflow-hidden">
         <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
           <div className="flex items-center gap-2">
             <Boxes className="h-4 w-4 text-primary" />

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export function WarehouseUtilization() {
   return (
-    <div className="rounded-xl border border-border bg-surface shadow-card">
+    <div className="rounded-md border border-border bg-surface">
       <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
         <div className="flex items-center gap-2">
           <Warehouse className="h-4 w-4 text-primary" />
