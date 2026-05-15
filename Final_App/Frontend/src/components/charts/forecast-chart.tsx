@@ -10,7 +10,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { forecastSeries } from "@/mock/forecast-data";
+import { forecastSeries as initialForecastSeries } from "@/mock/forecast-data";
+import { useContinuousData } from "@/hooks/useContinuousData";
 import type { ForecastPoint } from "@/types/prediction";
 import { DemandForecastKpiStrip } from "@/components/charts/demand-forecast-kpi-strip";
 import { Badge } from "@/components/ui/badge";
@@ -103,7 +104,8 @@ export function ForecastChart({ height = 360 }: { height?: number }) {
   const gradId = `df-confidence-${uid}`;
   const [view, setView] = useState<ChartView>("combined");
 
-  const data = useMemo(() => enrichData(forecastSeries), []);
+  const streamData = useContinuousData("/api/stream/forecasting", { forecastSeries: initialForecastSeries });
+  const data = useMemo(() => enrichData(streamData.forecastSeries), [streamData.forecastSeries]);
 
   const showConfidence = view === "confidence" || view === "combined";
   const showActual = view === "actual" || view === "combined";

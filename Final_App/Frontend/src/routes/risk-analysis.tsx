@@ -3,7 +3,8 @@ import { PageHeader } from "@/components/layout/page-header";
 import { RiskChart } from "@/components/charts/risk-chart";
 import { ActivityPanel } from "@/components/dashboard/activity-panel";
 import { AIInsights } from "@/components/dashboard/ai-insights";
-import { riskMatrix, riskTrend } from "@/mock/risk-data";
+import { riskMatrix as initialRiskMatrix, riskTrend } from "@/mock/risk-data";
+import { useContinuousData } from "@/hooks/useContinuousData";
 import { ShieldAlert, AlertTriangle, TrendingUp } from "lucide-react";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
 
@@ -18,6 +19,9 @@ export const Route = createFileRoute("/risk-analysis")({
 });
 
 function RiskPage() {
+  const streamData = useContinuousData("/api/stream/risk", { riskMatrix: initialRiskMatrix });
+  const riskMatrix = streamData.riskMatrix;
+
   const high = riskMatrix.filter((r) => r.exposure > 60).length;
   const tooltipStyle = {
     background: "var(--color-surface)", border: "1px solid var(--color-border)",

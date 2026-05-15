@@ -3,7 +3,8 @@ import { PageHeader } from "@/components/layout/page-header";
 import { InventoryChart } from "@/components/charts/inventory-chart";
 import { WarehouseUtilization } from "@/components/dashboard/warehouse-utilization";
 import { AIInsights } from "@/components/dashboard/ai-insights";
-import { inventoryItems } from "@/mock/inventory-data";
+import { inventoryItems as initialInventoryItems } from "@/mock/inventory-data";
+import { useContinuousData } from "@/hooks/useContinuousData";
 import { cn } from "@/lib/utils";
 import { AlertTriangle, Boxes } from "lucide-react";
 
@@ -25,6 +26,7 @@ const statusTone = {
 } as const;
 
 function InventoryPage() {
+  const inventoryItems = useContinuousData("/api/stream/inventory", initialInventoryItems);
   const critical = inventoryItems.filter((i) => i.status === "Critical").length;
 
   return (

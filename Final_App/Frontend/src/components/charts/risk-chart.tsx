@@ -1,7 +1,8 @@
 import {
   Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis, Cell,
 } from "recharts";
-import { riskMatrix } from "@/mock/risk-data";
+import { riskMatrix as initialRiskMatrix } from "@/mock/risk-data";
+import { useContinuousData } from "@/hooks/useContinuousData";
 
 const tooltipStyle = {
   background: "var(--color-surface)",
@@ -18,6 +19,9 @@ function colorFor(v: number) {
 }
 
 export function RiskChart({ height = 320 }: { height?: number }) {
+  const streamData = useContinuousData("/api/stream/risk", { riskMatrix: initialRiskMatrix });
+  const riskMatrix = streamData.riskMatrix;
+
   return (
     <div className="rounded-md border border-border bg-surface">
       <div className="flex items-center justify-between border-b border-border px-5 py-3.5">

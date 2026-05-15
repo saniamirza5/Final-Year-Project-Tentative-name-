@@ -1,5 +1,6 @@
 import type { ShipmentRecord } from "@/types/prediction";
-import { shipments as defaults } from "@/mock/shipment-data";
+import { shipments as initialShipments } from "@/mock/shipment-data";
+import { useContinuousData } from "@/hooks/useContinuousData";
 import { cn } from "@/lib/utils";
 import { Truck } from "lucide-react";
 
@@ -11,12 +12,15 @@ const statusTone: Record<ShipmentRecord["status"], string> = {
 };
 
 export function ShipmentTable({
-  data = defaults,
+  data: overrideData,
   title = "Active shipments",
 }: {
   data?: ShipmentRecord[];
   title?: string;
 }) {
+  const streamData = useContinuousData("/api/stream/shipments", initialShipments);
+  const data = overrideData ?? streamData;
+
   return (
     <div className="overflow-hidden rounded-md border border-border/70 bg-surface">
       <div className="flex items-center justify-between border-b border-border/60 px-6 py-4">

@@ -1,5 +1,6 @@
 import type { ActivityEvent } from "@/types/dashboard";
-import { activityFeed as defaults } from "@/mock/dashboard-data";
+import { activityFeed as initialActivityFeed, kpiMetrics as initialKpiMetrics } from "@/mock/dashboard-data";
+import { useContinuousData } from "@/hooks/useContinuousData";
 import { cn } from "@/lib/utils";
 
 const styles = {
@@ -10,7 +11,7 @@ const styles = {
 } as const;
 
 export function ActivityPanel({
-  events = defaults,
+  events: overrideEvents,
   variant = "default",
   previewCount,
 }: {
@@ -19,6 +20,9 @@ export function ActivityPanel({
   /** When set, only the first N events are shown. */
   previewCount?: number;
 }) {
+  const streamData = useContinuousData("/api/stream/dashboard", { activityFeed: initialActivityFeed, kpiMetrics: initialKpiMetrics });
+  const events = overrideEvents ?? streamData.activityFeed;
+
   const list = previewCount != null ? events.slice(0, previewCount) : events;
 
   return (

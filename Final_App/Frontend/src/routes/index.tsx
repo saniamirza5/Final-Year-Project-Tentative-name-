@@ -8,7 +8,8 @@ import { ActivityPanel } from "@/components/dashboard/activity-panel";
 import { ShipmentTable } from "@/components/dashboard/shipment-table";
 import { AutonomousDecisions } from "@/components/dashboard/autonomous-decisions";
 import { ForecastChart } from "@/components/charts/forecast-chart";
-import { aiInsightsExtended, overviewKpiMetrics } from "@/mock/dashboard-data";
+import { aiInsightsExtended, kpiMetrics as initialKpiMetrics } from "@/mock/dashboard-data";
+import { useContinuousData } from "@/hooks/useContinuousData";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,6 +22,11 @@ export const Route = createFileRoute("/")({
 });
 
 function Overview() {
+  const streamData = useContinuousData("/api/stream/dashboard", { kpiMetrics: initialKpiMetrics, activityFeed: [] });
+  const overviewKpiMetrics = streamData.kpiMetrics.filter((m) =>
+    ["k1", "k2", "k4", "k6"].includes(m.id)
+  );
+
   return (
     <div className="flex w-full min-w-0 flex-col gap-10 pb-2">
       <PageHeader

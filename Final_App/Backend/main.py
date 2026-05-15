@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from rag_handler import RAGHandler
 from ai_handler import AIHandler
 from mock_data import seed_mock_data
+from sendData import stream_router
 
 load_dotenv()
 
@@ -105,6 +106,8 @@ async def root():
         "version": "1.0.0",
         "mock_trigger": "POST /query with a prompt containing mock, connection, test, or backend",
     }
+
+app.include_router(stream_router, prefix="/api/stream", tags=["Streaming"])
 
 @app.post("/query", response_model=QueryResponse, tags=["AI Queries"])
 async def query(request: QueryRequest):
