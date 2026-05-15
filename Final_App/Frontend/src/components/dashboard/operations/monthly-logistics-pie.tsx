@@ -112,10 +112,10 @@ export function MonthlyLogisticsPie({ className }: { className?: string }) {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0 space-y-1">
           <h3 className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
-            Monthly Logistics Distribution
+            Logistics Mix
           </h3>
           <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-            Operational shipment performance across monthly supply chain activity.
+            Shipment status by month.
           </p>
         </div>
         <Select value={monthId} onValueChange={(v) => setMonthId(v as LogisticsMonthId)}>
