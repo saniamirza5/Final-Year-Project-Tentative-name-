@@ -1,1 +1,1 @@
-# Final-Year-Project-Tentative-name-
+# RIMS(Real time Inventory Monitoring system)
