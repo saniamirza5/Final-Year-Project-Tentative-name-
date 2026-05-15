@@ -50,12 +50,12 @@ function Overview() {
         >
           Snapshot
         </h2>
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-stretch">
-          <div className="flex min-h-0 min-w-0 flex-1 basis-0 lg:min-h-[22rem]">
-            <KpiGrid metrics={overviewKpiMetrics} className="h-full w-full min-h-[20rem] lg:min-h-0" />
+        <div className="grid min-w-0 grid-cols-1 gap-5 lg:grid-cols-2">
+          <div className="min-w-0">
+            <KpiGrid metrics={overviewKpiMetrics} className="h-full w-full" />
           </div>
-          <div className="flex min-h-0 min-w-0 flex-1 basis-0 lg:min-h-[22rem]">
-            <MonthlyLogisticsPie className="h-full w-full min-h-[20rem] lg:min-h-0" />
+          <div className="min-w-0">
+            <MonthlyLogisticsPie className="h-full w-full" />
           </div>
         </div>
       </section>

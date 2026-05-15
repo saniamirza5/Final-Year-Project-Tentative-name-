@@ -104,7 +104,7 @@ export function MonthlyLogisticsPie({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex h-full min-h-0 flex-col rounded-md border border-border/60 bg-surface p-5 transition-colors duration-200 sm:p-6",
+        "flex flex-col rounded-md border border-border/60 bg-surface p-5 transition-colors duration-200 sm:p-6",
         "hover:border-border",
         className
       )}
@@ -132,11 +132,13 @@ export function MonthlyLogisticsPie({ className }: { className?: string }) {
         </Select>
       </div>
 
-      <div className="relative mt-4 min-h-[220px] flex-1 sm:min-h-[260px]">
-        <ChartContainer config={chartConfig} className="mx-auto aspect-square h-full max-h-[280px] w-full">
+      <div className="relative mt-4 min-h-[220px] flex-1 sm:min-h-[260px]" style={{ overflow: "visible" }}>
+        <ChartContainer config={chartConfig} className="mx-auto aspect-square h-full max-h-[280px] w-full" style={{ overflow: "visible" }}>
           <PieChart key={monthId}>
             <ChartTooltip
               cursor={false}
+              wrapperStyle={{ zIndex: 50, pointerEvents: "none", position: "absolute" }}
+              allowEscapeViewBox={{ x: true, y: true }}
               content={(props) => (
                 <LogisticsTooltipBody active={props.active} payload={props.payload} total={total} />
               )}
@@ -173,7 +175,7 @@ export function MonthlyLogisticsPie({ className }: { className?: string }) {
         </ChartContainer>
 
         <div
-          className="pointer-events-none absolute inset-0 flex items-center justify-center pb-2"
+          className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center pb-2"
           aria-hidden
         >
           <div className="text-center">
