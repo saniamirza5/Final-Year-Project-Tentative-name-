@@ -30,6 +30,12 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 # ── Backend ────────────────────────────────────────────────────────────────
+echo "[start.sh] Installing Backend dependencies..."
+(
+  cd "$BACKEND_DIR"
+  pip install -r requirements.txt
+)
+
 echo "[start.sh] Starting Backend (FastAPI) on http://127.0.0.1:8000 ..."
 (
   cd "$BACKEND_DIR"
@@ -41,6 +47,12 @@ BACKEND_PID=$!
 sleep 3
 
 # ── Frontend ───────────────────────────────────────────────────────────────
+echo "[start.sh] Installing Frontend dependencies..."
+(
+  cd "$FRONTEND_DIR"
+  npm install
+)
+
 echo "[start.sh] Starting Frontend (Vite) on http://127.0.0.1:8082 ..."
 (
   cd "$FRONTEND_DIR"
