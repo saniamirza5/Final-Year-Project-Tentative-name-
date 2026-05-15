@@ -77,7 +77,7 @@ function LogisticsTooltipBody({
   const pct = total > 0 ? ((row.value / total) * 100).toFixed(0) : "0";
 
   return (
-    <div className="min-w-[11rem] rounded-md border border-border/70 bg-surface px-3 py-2.5 text-xs">
+    <div className="absolute z-50 pointer-events-none min-w-[11rem] rounded-md border border-border/70 bg-surface px-3 py-2.5 text-xs shadow-elevated">
       <p className="font-semibold text-foreground">{row.name}</p>
       <p className="mt-1.5 tabular-nums text-foreground">
         <span className="font-medium">{row.value.toLocaleString("en-US")}</span>{" "}
@@ -104,7 +104,7 @@ export function MonthlyLogisticsPie({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex h-full min-h-0 flex-col rounded-md border border-border/60 bg-surface p-5 transition-colors duration-200 sm:p-6",
+        "flex h-full min-h-0 w-full min-w-0 flex-col rounded-md border border-border/60 bg-surface p-5 transition-colors duration-200 sm:p-6",
         "hover:border-border",
         className
       )}
@@ -132,8 +132,20 @@ export function MonthlyLogisticsPie({ className }: { className?: string }) {
         </Select>
       </div>
 
-      <div className="relative mt-4 min-h-[220px] flex-1 sm:min-h-[260px]">
-        <ChartContainer config={chartConfig} className="mx-auto aspect-square h-full max-h-[280px] w-full">
+      <div className="relative mt-4 flex w-full min-w-0 flex-1 flex-col">
+        <div
+          className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center pb-2"
+          aria-hidden
+        >
+          <div className="text-center">
+            <p className="text-2xl font-bold tabular-nums tracking-tight text-foreground sm:text-3xl">
+              {total.toLocaleString("en-US")}
+            </p>
+            <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Shipments</p>
+          </div>
+        </div>
+
+        <ChartContainer config={chartConfig} className="relative z-10 mx-auto h-[220px] w-full min-w-0 sm:h-[260px]">
           <PieChart key={monthId}>
             <ChartTooltip
               cursor={false}
@@ -171,18 +183,6 @@ export function MonthlyLogisticsPie({ className }: { className?: string }) {
             </Pie>
           </PieChart>
         </ChartContainer>
-
-        <div
-          className="pointer-events-none absolute inset-0 flex items-center justify-center pb-2"
-          aria-hidden
-        >
-          <div className="text-center">
-            <p className="text-2xl font-bold tabular-nums tracking-tight text-foreground sm:text-3xl">
-              {total.toLocaleString("en-US")}
-            </p>
-            <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Shipments</p>
-          </div>
-        </div>
       </div>
 
       <p className="mt-4 border-t border-border/50 pt-4 text-xs leading-relaxed text-muted-foreground">
