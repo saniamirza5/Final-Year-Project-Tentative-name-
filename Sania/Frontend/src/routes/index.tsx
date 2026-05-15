@@ -1,3 +1,4 @@
+import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Download } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
@@ -21,6 +22,19 @@ export const Route = createFileRoute("/")({
 });
 
 function Overview() {
+  const [isExporting, setIsExporting] = React.useState(false);
+
+  const handleExport = async () => {
+    setIsExporting(true);
+    try {
+      // Simulate export process
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // In a real app, trigger CSV/PDF download here
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   return (
     <div className="flex w-full min-w-0 flex-col gap-10 pb-2">
       <PageHeader
@@ -29,10 +43,12 @@ function Overview() {
         actions={
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-sm border border-border/80 bg-surface px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-border hover:bg-surface-muted"
+            onClick={handleExport}
+            disabled={isExporting}
+            className="inline-flex items-center gap-2 rounded-sm border border-border/80 bg-surface px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-border hover:bg-surface-muted disabled:opacity-50"
           >
             <Download className="h-4 w-4 text-muted-foreground" />
-            Export
+            {isExporting ? "Exporting..." : "Export"}
           </button>
         }
       />
@@ -44,12 +60,12 @@ function Overview() {
         >
           Operational snapshot
         </h2>
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-stretch">
-          <div className="flex min-h-0 min-w-0 flex-1 basis-0 lg:min-h-[22rem]">
-            <KpiGrid metrics={overviewKpiMetrics} className="h-full w-full min-h-[20rem] lg:min-h-0" />
+        <div className="flex flex-col gap-5 xl:flex-row xl:items-stretch">
+          <div className="flex min-h-0 min-w-0 w-full flex-col xl:flex-1 xl:basis-0 xl:min-h-[22rem]">
+            <KpiGrid metrics={overviewKpiMetrics} className="w-full flex-1 min-h-[20rem] xl:min-h-0" />
           </div>
-          <div className="flex min-h-0 min-w-0 flex-1 basis-0 lg:min-h-[22rem]">
-            <MonthlyLogisticsPie className="h-full w-full min-h-[20rem] lg:min-h-0" />
+          <div className="flex min-h-0 min-w-0 w-full flex-col xl:flex-1 xl:basis-0 xl:min-h-[22rem]">
+            <MonthlyLogisticsPie className="w-full flex-1 min-h-[20rem] xl:min-h-0" />
           </div>
         </div>
       </section>

@@ -91,7 +91,7 @@ function RootComponent() {
 function AppShell() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
-    <div className="flex h-dvh min-h-0 w-full overflow-hidden bg-background">
+    <div className="flex h-screen min-h-0 w-full overflow-hidden bg-background">
       <Sidebar />
       <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-background">
         <Navbar />
